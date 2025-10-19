@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Teja Srinivas — Full‑Stack Developer & UI/UX</title>
+    <meta name="description" content="Portfolio of Teja Srinivas, full‑stack developer and UI/UX designer. Projects, case studies, and contact." />
+
+    <meta property="og:title" content="Teja Srinivas — Full‑Stack Developer & UI/UX" />
+    <meta property="og:description" content="Projects, case studies, and contact." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="/assets/og.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Teja Srinivas — Full‑Stack Developer & UI/UX" />
+    <meta name="twitter:description" content="Projects, case studies, and contact." />
+    <meta name="twitter:image" content="/assets/og.png" />
+
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary">
+      <nav class="nav container" aria-label="Main">
+        <a class="logo" href="#hero" aria-label="Go to top">
+          <span class="logo-mark" aria-hidden="true">TS</span>
+          <span class="logo-text">Teja Srinivas</span>
+        </a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+        <ul id="nav-menu" class="nav-menu">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <!-- Hero -->
+      <section id="hero" class="section hero">
+        <div class="container grid-2">
+          <div class="hero-copy">
+            <p class="eyebrow">Full‑Stack Developer • UI/UX</p>
+            <h1 class="display">Hi, I’m <span class="accent">Teja Srinivas</span>.</h1>
+            <p class="lead">I craft delightful user experiences and build reliable, scalable products end‑to‑end.</p>
+            <div class="cta-row">
+              <a class="btn primary" href="#projects">View Projects</a>
+              <a class="btn ghost" href="#contact">Contact Me</a>
+            </div>
+            <ul class="hero-meta">
+              <li>Full‑stack: React, Next.js, Node.js, Express</li>
+              <li>UI/UX: Figma, Design Systems, Prototyping</li>
+              <li>Cloud: Docker, CI/CD, AWS</li>
+            </ul>
+          </div>
+          <div class="hero-visual">
+            <div class="orbit">
+              <div class="planet"></div>
+              <div class="satellite s1"></div>
+              <div class="satellite s2"></div>
+              <div class="satellite s3"></div>
+            </div>
+          </div>
+        </div>
+        <button class="scroll-cue" aria-label="Scroll to About" data-scroll="#about"></button>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="section about">
+        <div class="container grid-2">
+          <div>
+            <h2>About</h2>
+            <p>I’m a product‑minded developer focused on creating accessible, performant interfaces and resilient backends. I blend design thinking with engineering discipline to ship experiences that users love.</p>
+            <p>Beyond pixels and APIs, I care deeply about system design, maintainability, and team velocity.</p>
+            <div class="about-highlights">
+              <div class="card">
+                <h3>Design</h3>
+                <p>Design systems, component libraries, motion, and rapid prototyping.</p>
+              </div>
+              <div class="card">
+                <h3>Engineering</h3>
+                <p>TypeScript, Node.js, React, performance tuning, testing, and DevOps.</p>
+              </div>
+              <div class="card">
+                <h3>Impact</h3>
+                <p>Data‑driven iteration, A/B testing, and measurable business outcomes.</p>
+              </div>
+            </div>
+          </div>
+          <aside class="about-aside">
+            <ul class="stats">
+              <li><span class="num" data-count="5">0</span><span class="label">+ Years</span></li>
+              <li><span class="num" data-count="30">0</span><span class="label">+ Projects</span></li>
+              <li><span class="num" data-count="10">0</span><span class="label">+ Case Studies</span></li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section id="skills" class="section skills">
+        <div class="container">
+          <h2>Skills</h2>
+          <div class="skills-grid">
+            <div class="chip">React</div>
+            <div class="chip">Next.js</div>
+            <div class="chip">TypeScript</div>
+            <div class="chip">Node.js</div>
+            <div class="chip">Express</div>
+            <div class="chip">PostgreSQL</div>
+            <div class="chip">MongoDB</div>
+            <div class="chip">GraphQL</div>
+            <div class="chip">Docker</div>
+            <div class="chip">AWS</div>
+            <div class="chip">CI/CD</div>
+            <div class="chip">Figma</div>
+            <div class="chip">Design Systems</div>
+            <div class="chip">Accessibility</div>
+            <div class="chip">Animations</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="section projects">
+        <div class="container">
+          <div class="section-head">
+            <h2>Selected Projects</h2>
+            <div class="filters">
+              <button class="filter is-active" data-filter="all">All</button>
+              <button class="filter" data-filter="frontend">Frontend</button>
+              <button class="filter" data-filter="fullstack">Full‑Stack</button>
+              <button class="filter" data-filter="uiux">UI/UX</button>
+            </div>
+          </div>
+          <div id="project-grid" class="project-grid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section id="experience" class="section experience">
+        <div class="container">
+          <h2>Experience</h2>
+          <ul class="timeline">
+            <li>
+              <div class="dot"></div>
+              <div class="content">
+                <h3>Senior Full‑Stack Engineer — Company</h3>
+                <p class="muted">2023 — Present</p>
+                <p>Led cross‑functional pods to ship complex UI/UX and platform features.</p>
+              </div>
+            </li>
+            <li>
+              <div class="dot"></div>
+              <div class="content">
+                <h3>Frontend Engineer — Company</h3>
+                <p class="muted">2021 — 2023</p>
+                <p>Built design‑system driven apps with delightful interactions and accessibility.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="section contact">
+        <div class="container grid-2">
+          <div>
+            <h2>Contact</h2>
+            <p class="lead">Have a project in mind or want to collaborate? Let’s talk.</p>
+            <ul class="contact-list">
+              <li><a href="mailto:hello@tejasrinivas.dev">hello@tejasrinivas.dev</a></li>
+              <li><a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+              <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+          </div>
+          <form class="contact-form" name="contact" netlify>
+            <input type="hidden" name="form-name" value="contact" />
+            <label>
+              <span>Name</span>
+              <input name="name" required />
+            </label>
+            <label>
+              <span>Email</span>
+              <input name="email" type="email" required />
+            </label>
+            <label>
+              <span>Message</span>
+              <textarea name="message" rows="4" required></textarea>
+            </label>
+            <button class="btn primary" type="submit">Send</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <a class="logo" href="#hero" aria-label="Go to top">
+          <span class="logo-mark" aria-hidden="true">TS</span>
+          <span class="logo-text">Teja Srinivas</span>
+        </a>
+        <p class="muted">© <span id="year"></span> Teja Srinivas. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="/scripts.js" defer></script>
+  </body>
+</html>

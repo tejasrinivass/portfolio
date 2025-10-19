@@ -1,0 +1,29 @@
+[
+  {
+    "title": "Design System Kit",
+    "subtitle": "Composable UI library with tokens and motion",
+    "emoji": "🎨",
+    "tags": ["frontend", "uiux"],
+    "tech": ["Figma", "React", "TypeScript", "Storybook"],
+    "links": { "code": "https://github.com/", "live": "https://example.com/design-system" },
+    "caseStudy": "https://example.com/case/design-system"
+  },
+  {
+    "title": "SaaS Dashboard",
+    "subtitle": "Multi-tenant analytics with realtime charts",
+    "emoji": "📊",
+    "tags": ["fullstack", "frontend"],
+    "tech": ["Next.js", "Node.js", "PostgreSQL", "Prisma", "Chart.js"],
+    "links": { "code": "https://github.com/", "live": "https://example.com/saas" },
+    "caseStudy": "https://example.com/case/saas"
+  },
+  {
+    "title": "UX Case Study: Onboarding",
+    "subtitle": "Reducing drop‑off with progressive profiling",
+    "emoji": "🧭",
+    "tags": ["uiux"],
+    "tech": ["Figma", "ProtoPie", "Experimentation"],
+    "links": { "live": "https://example.com/onboarding" },
+    "caseStudy": "https://example.com/case/onboarding"
+  }
+]
