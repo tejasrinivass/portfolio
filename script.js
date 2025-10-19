@@ -192,7 +192,65 @@ window.addEventListener('load', () => {
         const originalText = roleElement.textContent;
         typeWriter(roleElement, originalText, 80);
     }
+    
+    // Add matrix-style code rain effect
+    createCodeRain();
 });
+
+// Matrix-style code rain effect
+function createCodeRain() {
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0.1;
+    `;
+    document.body.appendChild(canvas);
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const chars = '01';
+    const charArray = chars.split('');
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+    
+    for (let i = 0; i < columns; i++) {
+        drops[i] = 1;
+    }
+    
+    function draw() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#667eea';
+        ctx.font = fontSize + 'px monospace';
+        
+        for (let i = 0; i < drops.length; i++) {
+            const text = charArray[Math.floor(Math.random() * charArray.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+    
+    setInterval(draw, 50);
+    
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+}
 
 // Contact form handling
 const contactForm = document.querySelector('.contact-form');
@@ -374,6 +432,14 @@ const enhancedObserver = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
+            
+            // Add special effects for different elements
+            if (entry.target.classList.contains('timeline-item')) {
+                entry.target.style.animation = 'slideInUp 0.6s ease-out';
+            }
+            if (entry.target.classList.contains('cert-card')) {
+                entry.target.style.animation = 'fadeInScale 0.6s ease-out';
+            }
         }
     });
 }, {
@@ -386,11 +452,91 @@ document.addEventListener('DOMContentLoaded', () => {
     addScrollAnimations();
     
     // Observe all animated elements
-    const animatedElements = document.querySelectorAll('.about-card, .stat-card, .skill-category, .project-card, .contact-card');
+    const animatedElements = document.querySelectorAll('.about-card, .stat-card, .skill-category, .project-card, .contact-card, .timeline-item, .cert-card, .achievement-item');
     animatedElements.forEach(element => {
         enhancedObserver.observe(element);
     });
+    
+    // Add particle system
+    createParticleSystem();
 });
+
+// Enhanced particle system
+function createParticleSystem() {
+    const particleContainer = document.createElement('div');
+    particleContainer.className = 'particle-system';
+    particleContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+    `;
+    
+    document.body.appendChild(particleContainer);
+    
+    for (let i = 0; i < 30; i++) {
+        createAdvancedParticle(particleContainer);
+    }
+}
+
+function createAdvancedParticle(container) {
+    const particle = document.createElement('div');
+    particle.className = 'advanced-particle';
+    
+    const size = Math.random() * 3 + 1;
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * window.innerHeight;
+    const duration = Math.random() * 15 + 10;
+    const delay = Math.random() * 5;
+    
+    particle.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        background: rgba(102, 126, 234, ${Math.random() * 0.5 + 0.2});
+        border-radius: 50%;
+        left: ${x}px;
+        top: ${y}px;
+        animation: floatUp ${duration}s infinite linear;
+        animation-delay: ${delay}s;
+        box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+    `;
+    
+    container.appendChild(particle);
+    
+    setTimeout(() => {
+        if (particle.parentNode) {
+            particle.parentNode.removeChild(particle);
+        }
+        createAdvancedParticle(container);
+    }, (duration + delay) * 1000);
+}
+
+// Add CSS for advanced particles
+const advancedStyle = document.createElement('style');
+advancedStyle.textContent = `
+    @keyframes floatUp {
+        0% {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(advancedStyle);
 
 // Smooth page loading
 window.addEventListener('load', () => {
