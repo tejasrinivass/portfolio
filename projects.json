@@ -1,29 +1,20 @@
 [
   {
-    "title": "Design System Kit",
-    "subtitle": "Composable UI library with tokens and motion",
-    "emoji": "🎨",
-    "tags": ["frontend", "uiux"],
-    "tech": ["Figma", "React", "TypeScript", "Storybook"],
-    "links": { "code": "https://github.com/", "live": "https://example.com/design-system" },
-    "caseStudy": "https://example.com/case/design-system"
-  },
-  {
-    "title": "SaaS Dashboard",
-    "subtitle": "Multi-tenant analytics with realtime charts",
+    "title": "Sales Insights Data Analysis",
+    "subtitle": "Transparency for informed decisions via Power BI dashboards",
     "emoji": "📊",
-    "tags": ["fullstack", "frontend"],
-    "tech": ["Next.js", "Node.js", "PostgreSQL", "Prisma", "Chart.js"],
-    "links": { "code": "https://github.com/", "live": "https://example.com/saas" },
-    "caseStudy": "https://example.com/case/saas"
+    "tags": ["data", "uiux"],
+    "tech": ["Power BI", "MySQL", "Power Query", "ETL"],
+    "links": { "live": "", "code": "" },
+    "caseStudy": "https://drive.google.com"
   },
   {
-    "title": "UX Case Study: Onboarding",
-    "subtitle": "Reducing drop‑off with progressive profiling",
-    "emoji": "🧭",
-    "tags": ["uiux"],
-    "tech": ["Figma", "ProtoPie", "Experimentation"],
-    "links": { "live": "https://example.com/onboarding" },
-    "caseStudy": "https://example.com/case/onboarding"
+    "title": "Student Learning Management System",
+    "subtitle": "Accessible learning platform with auth, course management, and analytics",
+    "emoji": "🎓",
+    "tags": ["fullstack"],
+    "tech": ["Java", "Spring", "Eclipse"],
+    "links": { "live": "", "code": "" },
+    "caseStudy": "https://drive.google.com"
   }
 ]

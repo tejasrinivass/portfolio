@@ -1,0 +1,7 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 560 320'>
+  <rect width='560' height='320' rx='16' fill='#0f1324' stroke='rgba(255,255,255,0.08)'/>
+  <text x='40' y='60' fill='#e6e7eb' font-family='Inter,system-ui' font-weight='800' font-size='28'>TensorFlow</text>
+  <text x='40' y='120' fill='#a3a7b3' font-family='Inter,system-ui' font-size='16'>Foundational training in TensorFlow</text>
+  <rect x='40' y='200' width='160' height='28' rx='14' fill='rgba(124,92,255,0.35)'/>
+  <text x='56' y='220' fill='#e6e7eb' font-family='Inter,system-ui' font-size='14'>Certificate Preview</text>
+</svg>

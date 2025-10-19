@@ -1,0 +1,38 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 700 520'>
+  <defs>
+    <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0' stop-color='#7c5cff'/>
+      <stop offset='1' stop-color='#00ffd1'/>
+    </linearGradient>
+    <linearGradient id='screen' x1='0' y1='0' x2='0' y2='1'>
+      <stop offset='0' stop-color='#12162a'/>
+      <stop offset='1' stop-color='#0b0f22'/>
+    </linearGradient>
+  </defs>
+  <rect width='700' height='520' rx='28' fill='#0d1020'/>
+  <g opacity='0.14'>
+    <circle cx='620' cy='60' r='120' fill='url(#bg)'/>
+    <circle cx='60' cy='480' r='140' fill='url(#bg)'/>
+  </g>
+  <g transform='translate(120,110)'>
+    <rect x='0' y='0' width='460' height='300' rx='20' fill='url(#screen)' stroke='rgba(255,255,255,0.06)'/>
+    <rect x='24' y='28' width='412' height='16' rx='8' fill='rgba(124,92,255,0.45)'/>
+    <rect x='24' y='60' width='160' height='10' rx='5' fill='rgba(255,255,255,0.25)'/>
+    <rect x='24' y='80' width='220' height='10' rx='5' fill='rgba(255,255,255,0.18)'/>
+    <rect x='24' y='110' width='360' height='10' rx='5' fill='rgba(0,255,209,0.35)'/>
+    <rect x='24' y='130' width='300' height='10' rx='5' fill='rgba(255,255,255,0.18)'/>
+    <rect x='24' y='160' width='260' height='10' rx='5' fill='rgba(255,255,255,0.25)'/>
+    <rect x='24' y='180' width='300' height='10' rx='5' fill='rgba(255,255,255,0.18)'/>
+    <rect x='24' y='200' width='180' height='10' rx='5' fill='rgba(0,255,209,0.35)'/>
+    <rect x='24' y='230' width='340' height='10' rx='5' fill='rgba(255,255,255,0.18)'/>
+    <rect x='24' y='250' width='220' height='10' rx='5' fill='rgba(255,255,255,0.25)'/>
+  </g>
+  <g transform='translate(520,250)'>
+    <circle cx='0' cy='0' r='46' fill='url(#bg)'/>
+    <rect x='-28' y='36' width='56' height='14' rx='7' fill='rgba(255,255,255,0.2)'/>
+  </g>
+  <g transform='translate(80,360)'>
+    <rect x='0' y='0' width='320' height='38' rx='10' fill='rgba(124,92,255,0.2)'/>
+    <rect x='12' y='10' width='160' height='18' rx='9' fill='rgba(255,255,255,0.5)'/>
+  </g>
+</svg>
