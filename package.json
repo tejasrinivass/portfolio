@@ -1,0 +1,36 @@
+{
+  "name": "teja-srinivas-portfolio",
+  "version": "1.0.0",
+  "description": "Modern animated portfolio website showcasing full-stack and UI/UX development skills",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=3000 --open=/",
+    "dev": "live-server --port=3000 --open=/ --watch=.",
+    "build": "echo 'Build complete - files are ready for deployment'",
+    "deploy": "echo 'Ready for deployment to your preferred hosting platform'"
+  },
+  "keywords": [
+    "portfolio",
+    "full-stack",
+    "ui-ux",
+    "developer",
+    "responsive",
+    "animations",
+    "modern-design"
+  ],
+  "author": "Teja Srinivas",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tejasrinivas/portfolio.git"
+  },
+  "homepage": "https://tejasrinivas.dev",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
