@@ -12,12 +12,29 @@ html {
 
 /* Enhanced smooth scrolling */
 html {
+    scroll-behavior: smooth;
     scroll-padding-top: 80px;
 }
 
-/* Add smooth transitions for all elements */
-* {
-    transition: all 0.3s ease;
+/* Custom scrollbar with enhanced styling */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 6px;
+    border: 2px solid #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
 }
 
 body {
@@ -306,6 +323,20 @@ body {
     justify-content: center;
     position: relative;
     overflow: hidden;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.profile-photo:hover {
+    transform: scale(1.05);
 }
 
 .profile-photo {
@@ -636,6 +667,7 @@ section {
     border-radius: 50%;
     border: 4px solid #0a0a0a;
     z-index: 2;
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
 }
 
 .timeline-content {
@@ -668,7 +700,6 @@ section {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
-    flex-wrap: wrap;
 }
 
 .timeline-header h3 {
@@ -677,7 +708,7 @@ section {
     margin: 0;
 }
 
-.timeline-year {
+.timeline-date {
     color: #b0b0b0;
     font-size: 0.9rem;
     background: rgba(102, 126, 234, 0.2);
@@ -694,7 +725,8 @@ section {
 
 .timeline-cgpa {
     color: #667eea;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 1.1rem;
     margin-bottom: 0.5rem;
 }
 
@@ -714,7 +746,7 @@ section {
     gap: 2rem;
 }
 
-.cert-card {
+.certification-card {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
     overflow: hidden;
@@ -723,7 +755,7 @@ section {
     transition: transform 0.3s ease;
 }
 
-.cert-card:hover {
+.certification-card:hover {
     transform: translateY(-10px);
 }
 
@@ -740,7 +772,7 @@ section {
     transition: transform 0.3s ease;
 }
 
-.cert-card:hover .cert-photo {
+.certification-card:hover .cert-photo {
     transform: scale(1.1);
 }
 
@@ -758,28 +790,25 @@ section {
     transition: opacity 0.3s ease;
 }
 
-.cert-card:hover .cert-overlay {
+.certification-card:hover .cert-overlay {
     opacity: 1;
 }
 
 .cert-link {
-    width: 50px;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     color: #fff;
     text-decoration: none;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: rgba(102, 126, 234, 0.8);
+    border-radius: 25px;
     transition: all 0.3s ease;
 }
 
 .cert-link:hover {
     background: #667eea;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .cert-content {
@@ -789,19 +818,22 @@ section {
 .cert-title {
     color: #fff;
     font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-}
-
-.cert-issuer {
-    color: #667eea;
-    font-weight: 600;
     margin-bottom: 1rem;
 }
 
 .cert-description {
     color: #b0b0b0;
     line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.cert-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #667eea;
     font-size: 0.9rem;
+    font-weight: 600;
 }
 
 /* Achievements Section */
@@ -820,6 +852,13 @@ section {
     border-radius: 15px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.category-title {
+    color: #667eea;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
 .achievement-list {
@@ -850,13 +889,13 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: #fff;
     flex-shrink: 0;
 }
 
 .achievement-content h4 {
-    color: #667eea;
+    color: #fff;
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
 }
@@ -1102,7 +1141,7 @@ section {
     transform: translateY(-3px);
 }
 
-/* Animations */
+/* Enhanced Animations */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -1133,6 +1172,115 @@ section {
     to {
         opacity: 1;
         transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(102, 126, 234, 0.6);
+    }
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    0%, 50% {
+        border-color: transparent;
+    }
+    51%, 100% {
+        border-color: #667eea;
+    }
+}
+
+/* Developer vibes animations */
+.developer-glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+.pulse-effect {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.float-up {
+    animation: floatUp 0.8s ease-out forwards;
+}
+
+/* Enhanced hover effects */
+.enhanced-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.enhanced-hover:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+}
+
+/* Code-like animations */
+.code-typing {
+    overflow: hidden;
+    border-right: 2px solid #667eea;
+    white-space: nowrap;
+    animation: typewriter 3s steps(40, end), blink 0.75s step-end infinite;
+}
+
+/* Matrix-like background effect */
+.matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+.matrix-char {
+    position: absolute;
+    color: #667eea;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    animation: matrix-fall linear infinite;
+}
+
+@keyframes matrix-fall {
+    0% {
+        transform: translateY(-100vh);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
     }
 }
 
@@ -1225,6 +1373,12 @@ section {
         margin: 0 !important;
     }
 
+    .timeline-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
     .certifications-grid {
         grid-template-columns: 1fr;
     }
@@ -1234,8 +1388,8 @@ section {
         text-align: center;
     }
 
-    .achievement-item:hover {
-        transform: translateY(-5px);
+    .achievement-icon {
+        align-self: center;
     }
 }
 

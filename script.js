@@ -626,6 +626,141 @@ document.head.appendChild(style);
 // Initialize particles
 document.addEventListener('DOMContentLoaded', createParticles);
 
+// Add developer vibes with code-like effects
+function addDeveloperVibes() {
+    // Add typing effect to role text
+    const roleElement = document.querySelector('.role');
+    if (roleElement) {
+        const text = roleElement.textContent;
+        roleElement.textContent = '';
+        roleElement.classList.add('code-typing');
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                roleElement.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            } else {
+                roleElement.classList.remove('code-typing');
+            }
+        }
+        setTimeout(typeWriter, 1000);
+    }
+
+    // Add matrix background effect
+    createMatrixBackground();
+
+    // Add enhanced hover effects
+    const cards = document.querySelectorAll('.project-card, .certification-card, .achievement-item, .timeline-content');
+    cards.forEach(card => {
+        card.classList.add('enhanced-hover');
+    });
+
+    // Add glow effects to important elements
+    const glowElements = document.querySelectorAll('.profile-card, .stat-card, .skill-category');
+    glowElements.forEach(element => {
+        element.classList.add('developer-glow');
+    });
+
+    // Add pulse effects to floating icons
+    const floatingIcons = document.querySelectorAll('.floating-icon');
+    floatingIcons.forEach(icon => {
+        icon.classList.add('pulse-effect');
+    });
+}
+
+// Create matrix background effect
+function createMatrixBackground() {
+    const matrixContainer = document.createElement('div');
+    matrixContainer.className = 'matrix-bg';
+    document.body.appendChild(matrixContainer);
+
+    const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+    
+    function createMatrixChar() {
+        const char = document.createElement('div');
+        char.className = 'matrix-char';
+        char.textContent = characters[Math.floor(Math.random() * characters.length)];
+        char.style.left = Math.random() * 100 + '%';
+        char.style.animationDuration = (Math.random() * 10 + 5) + 's';
+        char.style.animationDelay = Math.random() * 5 + 's';
+        
+        matrixContainer.appendChild(char);
+        
+        setTimeout(() => {
+            if (char.parentNode) {
+                char.parentNode.removeChild(char);
+            }
+        }, 15000);
+    }
+
+    // Create matrix characters periodically
+    setInterval(createMatrixChar, 200);
+}
+
+// Enhanced scroll animations with developer vibes
+function addEnhancedScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const enhancedObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('float-up');
+                
+                // Add special effects for different elements
+                if (entry.target.classList.contains('timeline-item')) {
+                    entry.target.style.animationDelay = `${Math.random() * 0.5}s`;
+                }
+                
+                if (entry.target.classList.contains('certification-card')) {
+                    entry.target.style.animationDelay = `${Math.random() * 0.3}s`;
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Observe all animated elements
+    const animatedElements = document.querySelectorAll('.timeline-item, .certification-card, .achievement-item, .project-card');
+    animatedElements.forEach(element => {
+        enhancedObserver.observe(element);
+    });
+}
+
+// Add code-like cursor effect
+function addCodeCursor() {
+    const cursor = document.createElement('div');
+    cursor.className = 'code-cursor';
+    cursor.innerHTML = '|';
+    cursor.style.cssText = `
+        position: fixed;
+        color: #667eea;
+        font-family: 'Courier New', monospace;
+        font-size: 20px;
+        font-weight: bold;
+        pointer-events: none;
+        z-index: 10000;
+        animation: blink 1s infinite;
+    `;
+    
+    document.body.appendChild(cursor);
+    
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 10 + 'px';
+        cursor.style.top = e.clientY - 10 + 'px';
+    });
+}
+
+// Initialize all developer vibes
+document.addEventListener('DOMContentLoaded', () => {
+    addDeveloperVibes();
+    addEnhancedScrollAnimations();
+    addCodeCursor();
+});
+
 // Performance optimization: Throttle scroll events
 function throttle(func, limit) {
     let inThrottle;
