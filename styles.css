@@ -298,9 +298,11 @@ body {
     overflow: hidden;
 }
 
-.image-placeholder {
-    font-size: 4rem;
-    color: #fff;
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .floating-elements {
@@ -323,32 +325,32 @@ body {
     animation: floatingIcon 4s ease-in-out infinite;
 }
 
-.floating-icon[data-icon="react"] {
+.floating-icon[data-icon="java"] {
     top: 10%;
     right: 10%;
     animation-delay: 0s;
-    color: #61dafb;
+    color: #f89820;
 }
 
-.floating-icon[data-icon="js"] {
+.floating-icon[data-icon="mysql"] {
     bottom: 20%;
     right: 5%;
     animation-delay: 1s;
-    color: #f7df1e;
+    color: #00758f;
 }
 
-.floating-icon[data-icon="node"] {
+.floating-icon[data-icon="chart"] {
     top: 30%;
     left: 5%;
     animation-delay: 2s;
-    color: #68a063;
+    color: #667eea;
 }
 
-.floating-icon[data-icon="figma"] {
+.floating-icon[data-icon="excel"] {
     bottom: 10%;
     left: 15%;
     animation-delay: 3s;
-    color: #f24e1e;
+    color: #217346;
 }
 
 @keyframes floatingIcon {
@@ -575,6 +577,70 @@ section {
 .projects {
     background: #111;
 }
+/* Education */
+.education {
+    background: #0a0a0a;
+}
+
+.timeline {
+    position: relative;
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, #667eea, #764ba2);
+    opacity: 0.5;
+}
+
+.timeline-item {
+    position: relative;
+    margin-left: 60px;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s ease;
+}
+
+.timeline-item.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -45px;
+    top: 12px;
+    width: 12px;
+    height: 12px;
+    background: #667eea;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+}
+
+.timeline-content {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.timeline-content h3 {
+    color: #fff;
+    margin-bottom: 0.3rem;
+}
+
+.timeline-meta {
+    color: #b0b0b0;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
 
 .projects-grid {
     display: grid;
@@ -680,6 +746,42 @@ section {
 .contact {
     background: #0a0a0a;
 }
+/* Certifications */
+.certifications {
+    background: #111;
+}
+
+.certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.cert-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    overflow: hidden;
+    transform: translateY(40px);
+    opacity: 0;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.cert-card.animate { transform: translateY(0); opacity: 1; }
+
+.cert-image {
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+}
+
+.cert-content { padding: 1rem 1.2rem; }
+
+.cert-content h3 { color: #fff; margin-bottom: 0.25rem; font-size: 1.05rem; }
+
+.cert-content p { color: #b0b0b0; font-size: 0.95rem; margin-bottom: 0.8rem; }
+
+.cert-actions { display: flex; gap: 0.5rem; }
 
 .contact-content {
     display: grid;
@@ -769,6 +871,31 @@ section {
     background: #111;
     padding: 2rem 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+/* Achievements */
+.achievements { background: #0a0a0a; }
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+.achievement-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 1.5rem;
+    text-align: center;
+    transform: translateY(40px);
+    opacity: 0;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+.achievement-card.animate { transform: translateY(0); opacity: 1; }
+.achievement-icon {
+    width: 60px; height: 60px; border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff; font-size: 1.2rem;
 }
 
 .footer-content {

@@ -130,6 +130,16 @@ document.addEventListener('DOMContentLoaded', () => {
     projectCards.forEach(card => {
         observer.observe(card);
     });
+
+    // Observe new components
+    const educationItems = document.querySelectorAll('.timeline-item');
+    educationItems.forEach(item => observer.observe(item));
+
+    const certificationCards = document.querySelectorAll('.cert-card');
+    certificationCards.forEach(card => observer.observe(card));
+
+    const achievementCards = document.querySelectorAll('.achievement-card');
+    achievementCards.forEach(card => observer.observe(card));
 });
 
 // Counter animation for statistics
