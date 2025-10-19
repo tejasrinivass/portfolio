@@ -134,10 +134,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Counter animation for statistics
 function animateCounter(element) {
-    const target = parseInt(element.getAttribute('data-count'));
+    const target = parseFloat(element.getAttribute('data-count'));
     const duration = 2000;
     const increment = target / (duration / 16);
     let current = 0;
+    const isDecimal = target % 1 !== 0;
 
     const timer = setInterval(() => {
         current += increment;
@@ -145,7 +146,8 @@ function animateCounter(element) {
             current = target;
             clearInterval(timer);
         }
-        element.textContent = Math.floor(current);
+        // Handle decimal numbers (like CGPA)
+        element.textContent = isDecimal ? current.toFixed(1) : Math.floor(current);
     }, 16);
 }
 
@@ -563,3 +565,206 @@ function createLoadingScreen() {
 
 // Initialize loading screen
 createLoadingScreen();
+
+// Enhanced smooth scrolling with easing
+document.addEventListener('DOMContentLoaded', () => {
+    // Smooth scroll with custom easing
+    const smoothScroll = (target, duration = 1000) => {
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 80;
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        let startTime = null;
+
+        const easeInOutCubic = (t) => {
+            return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+        };
+
+        const animation = (currentTime) => {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1);
+            const ease = easeInOutCubic(progress);
+            
+            window.scrollTo(0, startPosition + distance * ease);
+            
+            if (timeElapsed < duration) {
+                requestAnimationFrame(animation);
+            }
+        };
+
+        requestAnimationFrame(animation);
+    };
+
+    // Apply smooth scroll to all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                smoothScroll(targetElement, 800);
+            }
+        });
+    });
+
+    // Animate elements on scroll
+    const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.education-item, .certification-card, .achievement-card, .project-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        elements.forEach(element => {
+            observer.observe(element);
+        });
+    };
+
+    animateOnScroll();
+
+    // Add hover effect to navigation links
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+        link.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+
+    // Add parallax effect to hero section
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const heroSection = document.querySelector('.hero');
+        if (heroSection) {
+            heroSection.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+    });
+
+    // Add typing indicator animation
+    const addTypingEffect = () => {
+        const roleElement = document.querySelector('.role');
+        if (roleElement) {
+            const text = roleElement.textContent;
+            roleElement.textContent = '';
+            let index = 0;
+
+            const typeChar = () => {
+                if (index < text.length) {
+                    roleElement.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(typeChar, 50);
+                }
+            };
+
+            setTimeout(typeChar, 1000);
+        }
+    };
+
+    // Certifications card flip effect
+    const certCards = document.querySelectorAll('.certification-card');
+    certCards.forEach(card => {
+        card.addEventListener('click', function() {
+            this.style.transform = 'rotateY(360deg)';
+            setTimeout(() => {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            }, 600);
+        });
+    });
+
+    // Add gradient animation to section titles
+    const sectionTitles = document.querySelectorAll('.section-title');
+    sectionTitles.forEach(title => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(title);
+    });
+
+    // Progress bar animation for skills
+    const skillBars = document.querySelectorAll('.skill-progress');
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const width = entry.target.getAttribute('data-width');
+                setTimeout(() => {
+                    entry.target.style.width = width + '%';
+                    entry.target.style.transition = 'width 1.5s ease-out';
+                }, 200);
+                skillObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    skillBars.forEach(bar => {
+        skillObserver.observe(bar);
+    });
+});
+
+// Add keyboard navigation support
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const navMenu = document.getElementById('nav-menu');
+        const hamburger = document.getElementById('hamburger');
+        if (navMenu.classList.contains('active')) {
+            hamburger.click();
+        }
+    }
+});
+
+// Performance optimization: Debounce function
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Add scroll progress indicator
+const createScrollProgress = () => {
+    const progressBar = document.createElement('div');
+    progressBar.id = 'scroll-progress';
+    progressBar.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        z-index: 10000;
+        transition: width 0.1s ease;
+        width: 0%;
+    `;
+    document.body.appendChild(progressBar);
+
+    window.addEventListener('scroll', debounce(() => {
+        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (window.pageYOffset / windowHeight) * 100;
+        progressBar.style.width = scrolled + '%';
+    }, 10));
+};
+
+createScrollProgress();
