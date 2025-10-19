@@ -51,6 +51,7 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <canvas id="code-canvas" class="code-canvas" aria-hidden="true"></canvas>
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-text">
@@ -66,6 +67,22 @@
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-primary">View My Work</a>
                         <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    </div>
+                    <ul class="hero-badges" aria-label="Key skills">
+                        <li class="hero-badge">Java</li>
+                        <li class="hero-badge">MySQL</li>
+                        <li class="hero-badge">Power BI</li>
+                        <li class="hero-badge">HTML</li>
+                        <li class="hero-badge">CSS</li>
+                    </ul>
+                    <div class="terminal" role="region" aria-label="Developer terminal">
+                        <div class="terminal-header">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <span class="terminal-title">~/portfolio</span>
+                        </div>
+                        <pre class="terminal-body" id="terminal-body"></pre>
                     </div>
                 </div>
                 <div class="hero-image">

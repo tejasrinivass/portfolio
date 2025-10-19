@@ -180,7 +180,7 @@ window.addEventListener('scroll', () => {
 });
 
 // Typing effect for hero text
-function typeWriter(element, text, speed = 100) {
+function typeWriter(element, text, speed = 100, loop = false) {
     let i = 0;
     element.innerHTML = '';
     
@@ -189,6 +189,12 @@ function typeWriter(element, text, speed = 100) {
             element.innerHTML += text.charAt(i);
             i++;
             setTimeout(type, speed);
+        } else if (loop) {
+            setTimeout(() => {
+                element.innerHTML = '';
+                i = 0;
+                type();
+            }, 1200);
         }
     }
     
@@ -199,8 +205,20 @@ function typeWriter(element, text, speed = 100) {
 window.addEventListener('load', () => {
     const roleElement = document.querySelector('.role');
     if (roleElement) {
-        const originalText = roleElement.textContent;
-        typeWriter(roleElement, originalText, 80);
+        const roles = [
+            'Hardcore Java Developer',
+            'Data Analyst • Power BI',
+            'MySQL Wrangler',
+            'Frontend Builder (HTML/CSS)'
+        ];
+        let index = 0;
+        function loopRoles() {
+            const text = roles[index % roles.length];
+            typeWriter(roleElement, text, 70, false);
+            index++;
+            setTimeout(loopRoles, 2600);
+        }
+        loopRoles();
     }
 });
 
@@ -573,3 +591,104 @@ function createLoadingScreen() {
 
 // Initialize loading screen
 createLoadingScreen();
+
+// Matrix/code rain canvas background
+function startCodeCanvas() {
+    const canvas = document.getElementById('code-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = document.querySelector('.hero').offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', throttle(resize, 200));
+
+    const characters = '01<>/{}[]#@$%^&*+=-';
+    const fontSize = 14;
+    const columns = () => Math.floor(canvas.width / fontSize);
+    let drops = Array(columns()).fill(1);
+
+    function draw() {
+        ctx.fillStyle = 'rgba(10, 10, 10, 0.08)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#6d83f2';
+        ctx.font = `${fontSize}px monospace`;
+        for (let i = 0; i < drops.length; i++) {
+            const text = characters.charAt(Math.floor(Math.random() * characters.length));
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+        requestAnimationFrame(draw);
+    }
+
+    // Recompute columns on resize
+    window.addEventListener('resize', throttle(() => {
+        drops = Array(columns()).fill(1);
+    }, 300));
+
+    draw();
+}
+
+document.addEventListener('DOMContentLoaded', startCodeCanvas);
+
+// 3D tilt effect on profile-card
+function initTilt() {
+    const card = document.querySelector('.profile-card');
+    if (!card) return;
+    const bounds = 20;
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const rotateY = ((x / rect.width) - 0.5) * bounds;
+        const rotateX = -((y / rect.height) - 0.5) * bounds;
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initTilt);
+
+// Terminal typing simulation
+function initTerminal() {
+    const el = document.getElementById('terminal-body');
+    if (!el) return;
+    const lines = [
+        'teja@dev:~$ whoami',
+        'SAVALAM TEJA SRINIVAS',
+        'teja@dev:~$ skills --show',
+        'Java · MySQL · Power BI · HTML · CSS',
+        'teja@dev:~$ deploy --target=portfolio',
+        '✅ Deployed successfully on port :3000'
+    ];
+    let lineIndex = 0;
+    function printNext() {
+        if (lineIndex >= lines.length) {
+            lineIndex = 0;
+            el.textContent = '';
+        }
+        const text = lines[lineIndex++];
+        let i = 0;
+        const printChar = () => {
+            if (i <= text.length) {
+                el.textContent += text.slice(0, i) + '\n';
+                i++;
+                setTimeout(printChar, 20);
+            } else {
+                setTimeout(printNext, 600);
+            }
+        };
+        printChar();
+    }
+    printNext();
+}
+
+document.addEventListener('DOMContentLoaded', initTerminal);
