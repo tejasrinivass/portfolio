@@ -67,17 +67,38 @@ function updateActiveNavLink() {
 
 window.addEventListener('scroll', updateActiveNavLink);
 
-// Smooth scrolling for navigation links
+// Enhanced smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
             const offsetTop = target.offsetTop - 80;
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
+            
+            // Custom smooth scrolling with easing
+            const startPosition = window.pageYOffset;
+            const distance = offsetTop - startPosition;
+            const duration = 1000; // 1 second
+            let start = null;
+
+            function step(timestamp) {
+                if (!start) start = timestamp;
+                const progress = timestamp - start;
+                const progressPercentage = Math.min(progress / duration, 1);
+                
+                // Easing function (ease-in-out)
+                const ease = progressPercentage < 0.5 
+                    ? 2 * progressPercentage * progressPercentage 
+                    : 1 - Math.pow(-2 * progressPercentage + 2, 3) / 2;
+                
+                window.scrollTo(0, startPosition + distance * ease);
+                
+                if (progress < duration) {
+                    window.requestAnimationFrame(step);
+                }
+            }
+            
+            window.requestAnimationFrame(step);
         }
     });
 });
@@ -563,3 +584,319 @@ function createLoadingScreen() {
 
 // Initialize loading screen
 createLoadingScreen();
+
+// Matrix background effect
+function createMatrixEffect() {
+    const matrixContainer = document.createElement('div');
+    matrixContainer.className = 'matrix-bg';
+    document.body.appendChild(matrixContainer);
+    
+    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+    
+    function createMatrixChar() {
+        const char = document.createElement('div');
+        char.className = 'matrix-char';
+        char.textContent = chars[Math.floor(Math.random() * chars.length)];
+        char.style.left = Math.random() * window.innerWidth + 'px';
+        char.style.animationDuration = (Math.random() * 10 + 5) + 's';
+        char.style.animationDelay = Math.random() * 5 + 's';
+        
+        matrixContainer.appendChild(char);
+        
+        setTimeout(() => {
+            if (char.parentNode) {
+                char.parentNode.removeChild(char);
+            }
+        }, 15000);
+    }
+    
+    // Create matrix characters periodically
+    setInterval(createMatrixChar, 200);
+}
+
+// Enhanced scroll reveal animations
+function initScrollReveal() {
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                // Add stagger effect for grouped elements
+                const siblings = entry.target.parentNode.children;
+                Array.from(siblings).forEach((sibling, index) => {
+                    if (sibling.classList.contains('reveal') || 
+                        sibling.classList.contains('reveal-left') || 
+                        sibling.classList.contains('reveal-right') || 
+                        sibling.classList.contains('reveal-scale')) {
+                        setTimeout(() => {
+                            sibling.classList.add('active');
+                        }, index * 100);
+                    }
+                });
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    revealElements.forEach(el => {
+        revealObserver.observe(el);
+    });
+}
+
+// Terminal-like typing effect
+function createTerminalEffect(element, commands, speed = 50) {
+    let commandIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    function type() {
+        const currentCommand = commands[commandIndex];
+        
+        if (isDeleting) {
+            element.textContent = currentCommand.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            element.textContent = currentCommand.substring(0, charIndex + 1);
+            charIndex++;
+        }
+        
+        let typeSpeed = speed;
+        
+        if (isDeleting) {
+            typeSpeed /= 2;
+        }
+        
+        if (!isDeleting && charIndex === currentCommand.length) {
+            typeSpeed = 2000; // Pause at end
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            commandIndex = (commandIndex + 1) % commands.length;
+            typeSpeed = 500; // Pause before next command
+        }
+        
+        setTimeout(type, typeSpeed);
+    }
+    
+    type();
+}
+
+// Code syntax highlighting effect
+function addSyntaxHighlighting() {
+    const codeElements = document.querySelectorAll('.code-style');
+    
+    codeElements.forEach(element => {
+        let text = element.textContent;
+        
+        // Simple syntax highlighting
+        text = text.replace(/\b(function|const|let|var|if|else|for|while|return)\b/g, '<span style="color: #ff6b6b;">$1</span>');
+        text = text.replace(/\b(true|false|null|undefined)\b/g, '<span style="color: #4ecdc4;">$1</span>');
+        text = text.replace(/(['"`])(.*?)\1/g, '<span style="color: #95e1d3;">$1$2$1</span>');
+        text = text.replace(/\/\/(.*?)$/gm, '<span style="color: #6c757d; font-style: italic;">//$1</span>');
+        
+        element.innerHTML = text;
+    });
+}
+
+// Enhanced particle system
+function createEnhancedParticles() {
+    const particleContainer = document.createElement('div');
+    particleContainer.className = 'particle-system';
+    document.body.appendChild(particleContainer);
+    
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const size = Math.random() * 6 + 2;
+        const x = Math.random() * window.innerWidth;
+        const duration = Math.random() * 20 + 10;
+        const delay = Math.random() * 5;
+        
+        particle.style.cssText = `
+            width: ${size}px;
+            height: ${size}px;
+            left: ${x}px;
+            top: 100vh;
+            animation: particleFloat ${duration}s linear ${delay}s infinite;
+        `;
+        
+        particleContainer.appendChild(particle);
+        
+        setTimeout(() => {
+            if (particle.parentNode) {
+                particle.parentNode.removeChild(particle);
+            }
+        }, (duration + delay) * 1000);
+    }
+    
+    // Create particles periodically
+    setInterval(createParticle, 300);
+}
+
+// Glitch effect for text
+function addGlitchEffect(element) {
+    const originalText = element.textContent;
+    const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+    
+    function glitch() {
+        let glitchedText = '';
+        for (let i = 0; i < originalText.length; i++) {
+            if (Math.random() < 0.1) {
+                glitchedText += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+            } else {
+                glitchedText += originalText[i];
+            }
+        }
+        element.textContent = glitchedText;
+        
+        setTimeout(() => {
+            element.textContent = originalText;
+        }, 50);
+    }
+    
+    element.addEventListener('mouseenter', () => {
+        const glitchInterval = setInterval(glitch, 100);
+        setTimeout(() => clearInterval(glitchInterval), 500);
+    });
+}
+
+// Initialize all enhanced effects
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize matrix effect (subtle)
+    if (window.innerWidth > 768) {
+        createMatrixEffect();
+    }
+    
+    // Initialize scroll reveal
+    initScrollReveal();
+    
+    // Initialize enhanced particles
+    createEnhancedParticles();
+    
+    // Add syntax highlighting
+    addSyntaxHighlighting();
+    
+    // Add glitch effect to titles
+    const titles = document.querySelectorAll('.section-title');
+    titles.forEach(title => addGlitchEffect(title));
+    
+    // Terminal typing effect for role
+    const roleElement = document.querySelector('.role');
+    if (roleElement) {
+        const commands = [
+            'Computer Science Engineer',
+            'Data Analyst',
+            'Cloud Enthusiast',
+            'Java Developer'
+        ];
+        createTerminalEffect(roleElement, commands, 100);
+    }
+    
+    // Add reveal classes to elements
+    const sections = document.querySelectorAll('section');
+    sections.forEach((section, index) => {
+        section.classList.add('reveal');
+        section.style.animationDelay = `${index * 0.1}s`;
+    });
+    
+    const cards = document.querySelectorAll('.skill-category, .project-card, .certification-card, .achievement-card, .education-card');
+    cards.forEach((card, index) => {
+        card.classList.add('reveal-scale');
+        card.style.animationDelay = `${index * 0.1}s`;
+    });
+});
+
+// Enhanced cursor trail with developer theme
+let mouseTrailEnhanced = [];
+const trailLengthEnhanced = 15;
+
+document.addEventListener('mousemove', (e) => {
+    mouseTrailEnhanced.push({ 
+        x: e.clientX, 
+        y: e.clientY, 
+        time: Date.now() 
+    });
+    
+    if (mouseTrailEnhanced.length > trailLengthEnhanced) {
+        mouseTrailEnhanced.shift();
+    }
+    
+    updateEnhancedTrail();
+});
+
+function updateEnhancedTrail() {
+    document.querySelectorAll('.cursor-trail-enhanced').forEach(el => el.remove());
+    
+    mouseTrailEnhanced.forEach((point, index) => {
+        const trail = document.createElement('div');
+        trail.className = 'cursor-trail-enhanced';
+        
+        const age = Date.now() - point.time;
+        const opacity = Math.max(0, 1 - age / 1000);
+        const size = Math.max(2, 12 - (index * 0.8));
+        
+        trail.style.cssText = `
+            position: fixed;
+            width: ${size}px;
+            height: ${size}px;
+            background: radial-gradient(circle, rgba(102, 126, 234, ${opacity}) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            left: ${point.x}px;
+            top: ${point.y}px;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 ${size * 2}px rgba(102, 126, 234, ${opacity * 0.5});
+        `;
+        
+        document.body.appendChild(trail);
+        
+        setTimeout(() => {
+            if (trail.parentNode) {
+                trail.style.opacity = '0';
+                trail.style.transition = 'opacity 0.3s ease';
+                setTimeout(() => {
+                    if (trail.parentNode) {
+                        trail.parentNode.removeChild(trail);
+                    }
+                }, 300);
+            }
+        }, 100);
+    });
+}
+
+// Konami code easter egg
+let konamiCode = [];
+const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // Up, Up, Down, Down, Left, Right, Left, Right, B, A
+
+document.addEventListener('keydown', (e) => {
+    konamiCode.push(e.keyCode);
+    
+    if (konamiCode.length > konamiSequence.length) {
+        konamiCode.shift();
+    }
+    
+    if (konamiCode.length === konamiSequence.length && 
+        konamiCode.every((code, index) => code === konamiSequence[index])) {
+        
+        // Easter egg: Matrix rain effect
+        document.body.style.background = '#000';
+        showNotification('🎉 Developer mode activated! Matrix effect enabled.', 'success');
+        
+        // Intensify matrix effect
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => {
+                const matrixContainer = document.querySelector('.matrix-bg');
+                if (matrixContainer) {
+                    matrixContainer.style.opacity = '0.3';
+                }
+            }, i * 50);
+        }
+        
+        konamiCode = [];
+    }
+});
